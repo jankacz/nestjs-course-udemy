@@ -3,16 +3,7 @@ GET http://localhost:3000/users
 
 GET http://localhost:3000/users/1
 
-GET http://localhost:3000/users/1
+GET http://localhost:3000/users/123
 ?limit=20
+&page=2
 &offset=10
-
-POST http://localhost:3000/users
-Content-Type: application/json
-
-{
-    "firstName":"Johny",
-    "lastName":"Doe",
-    "email":"johndoe@gmail.com",
-    "password":"pass123"
-}
