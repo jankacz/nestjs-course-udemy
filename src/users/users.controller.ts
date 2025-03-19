@@ -12,16 +12,18 @@ import {
 import { CreateUserDto } from './dtos/create-user.dto';
 import { GetUsersParamDto } from './dtos/get-users-param.dto';
 import { PatchUserDto } from './dtos/patch-user.dto';
+import { UsersService } from './providers/users.service';
 
 @Controller('users')
 export class UsersController {
+  constructor(private readonly usersService: UsersService) {}
   @Get('{/:id}')
   public getUsers(
     @Param() getUsersParamDto: GetUsersParamDto,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe)
-    limit: number | undefined,
+    limit: number,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe)
-    page: number | undefined,
+    page: number,
   ) {
     console.log(typeof getUsersParamDto);
     console.log(getUsersParamDto);
@@ -30,7 +32,7 @@ export class UsersController {
     console.log(limit);
     console.log(page);
 
-    return 'test';
+    return this.usersService.findAll(getUsersParamDto, limit, page);
   }
 
   @Post()
