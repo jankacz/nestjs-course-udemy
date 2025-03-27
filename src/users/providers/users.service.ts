@@ -67,11 +67,7 @@ export class UsersService {
   /**
    * The method to get signle user from the database
    */
-  public findOneById(id: string) {
-    console.log(id);
-    return {
-      firstName: 'Alice',
-      email: 'alice@smith.com',
-    };
+  public async findOneById(id: number) {
+    return await this.usersRepository.findOneBy({ id });
   }
 }
