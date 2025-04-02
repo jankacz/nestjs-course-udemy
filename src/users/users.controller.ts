@@ -47,13 +47,6 @@ export class UsersController {
     @Query('page', new DefaultValuePipe(1), ParseIntPipe)
     page: number,
   ) {
-    console.log(typeof getUsersParamDto);
-    console.log(getUsersParamDto);
-    console.log(typeof limit);
-    console.log(typeof page);
-    console.log(limit);
-    console.log(page);
-
     return this.usersService.findAll(getUsersParamDto, limit, page);
   }
 
