@@ -46,8 +46,13 @@ export class UsersController {
     limit: number,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe)
     page: number,
+    @Param('id', new DefaultValuePipe(0), ParseIntPipe)
+    id: number,
   ) {
-    return this.usersService.findAll(getUsersParamDto, limit, page);
+    if (id === 0) {
+      return this.usersService.findAll();
+    }
+    return this.usersService.findOneById(id);
   }
 
   @Post()
