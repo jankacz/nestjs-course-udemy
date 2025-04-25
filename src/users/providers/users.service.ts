@@ -10,12 +10,14 @@ import {
 } from '@nestjs/common';
 import { GetUsersParamDto } from '../dtos/get-users-param.dto';
 import { AuthService } from 'src/auth/providers/auth.service';
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { User } from '../user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto } from '../dtos/create-user.dto';
 import { ConfigService, ConfigType } from '@nestjs/config';
 import profileConfig from '../config/profile.config';
+import { UsersCreateManyProvider } from './users-create-many.provider';
+import { CreateManyUsersDto } from '../dtos/create-many-users.dto';
 
 /**
  * Class to connect to Users table and perfor business operations
@@ -37,6 +39,9 @@ export class UsersService {
     private readonly authService: AuthService,
 
     private readonly configService: ConfigService,
+
+    //Inject userscreatemany provider
+    private readonly usersCreateManyProvider: UsersCreateManyProvider,
   ) {}
 
   /**
@@ -100,6 +105,7 @@ export class UsersService {
    */
   public async findOneById(id: number) {
     let user: User | null | undefined = undefined;
+
     try {
       user = await this.usersRepository.findOneBy({ id });
     } catch (error) {
@@ -115,5 +121,9 @@ export class UsersService {
       );
     }
     return await this.usersRepository.findOneBy({ id });
+  }
+
+  public async createMany(createManyUsersDto: CreateManyUsersDto) {
+    return await this.usersCreateManyProvider.createMany(createManyUsersDto);
   }
 }

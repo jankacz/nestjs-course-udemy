@@ -7,3 +7,22 @@ Content-Type: application/json
     "email":"StefcioDiaz@gmail.com",
     "password":"123quiet123!"
 }
+
+
+POST http://localhost:3000/users/create-many
+Content-Type: application/json
+{
+    "users": [
+        {
+        "firstName":"Buzz",
+        "lastName":"Astral",
+        "email":"Buzz@Astral.com",
+        "password":"Astral123!"
+        },
+        {
+        "firstName":"Szeryf",
+        "lastName":"Chudy",
+        "email":"Szeryf@Chudy.com",
+        "password":"Chudy123!"
+        }]      
+}
